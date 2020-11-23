@@ -1,0 +1,4 @@
+doc/_build
+dv/a.out
+dv/*.vcd
+.vscode

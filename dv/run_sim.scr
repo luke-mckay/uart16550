@@ -131,14 +131,14 @@ simulate:
     ######################
     
     # Design files
-    echo "../../../rtl/verilog/uart_top.v"                    >> ./file_list.lst
-    echo "../../../rtl/verilog/uart_wb.v"                     >> ./file_list.lst
-    echo "../../../rtl/verilog/uart_transmitter.v"            >> ./file_list.lst
-    echo "../../../rtl/verilog/uart_receiver.v"               >> ./file_list.lst
-    echo "../../../rtl/verilog/uart_tfifo.v"                  >> ./file_list.lst
-    echo "../../../rtl/verilog/uart_rfifo.v"                  >> ./file_list.lst
-    echo "../../../rtl/verilog/uart_regs.v"                   >> ./file_list.lst
-    echo "../../../rtl/verilog/uart_debug_if.v"               >> ./file_list.lst
+    echo "../../../rtl/uart_top.v"                    >> ./file_list.lst
+    echo "../../../rtl/uart_wb.v"                     >> ./file_list.lst
+    echo "../../../rtl/uart_transmitter.v"            >> ./file_list.lst
+    echo "../../../rtl/uart_receiver.v"               >> ./file_list.lst
+    echo "../../../rtl/uart_tfifo.v"                  >> ./file_list.lst
+    echo "../../../rtl/uart_rfifo.v"                  >> ./file_list.lst
+    echo "../../../rtl/uart_regs.v"                   >> ./file_list.lst
+    echo "../../../rtl/uart_debug_if.v"               >> ./file_list.lst
 
     # Testcase file
     if ($arg_test == 0) then
@@ -210,7 +210,7 @@ simulate:
         echo "-HDLVAR ../bin/hdl.var"                             >> ./compile.args
         echo "-MESSAGES"                                          >> ./compile.args
         echo "-NOCOPYRIGHT"                                       >> ./compile.args
-        echo "-INCDIR ../../../rtl/verilog"                       >> ./compile.args
+        echo "-INCDIR ../../../rtl"                               >> ./compile.args
         echo "-INCDIR ../../../bench/verilog"                     >> ./compile.args
         echo "-INCDIR ../../../bench/verilog/testcases"           >> ./compile.args
         if ($arg_verb == 1) then
@@ -243,11 +243,11 @@ simulate:
     
         # compile.args argument file
         echo "+libext+.v"                               >> ./compile.args
-        echo "-y ../../../rtl/verilog"                  >> ./compile.args
+        echo "-y ../../../rtl"                          >> ./compile.args
         echo "-y ../../../bench/verilog"                >> ./compile.args
         echo "-y ../../../bench/verilog/testcases"      >> ./compile.args
         echo "-work ./work"                             >> ./compile.args
-        echo "+incdir+../../../rtl/verilog"             >> ./compile.args
+        echo "+incdir+../../../rtl"                     >> ./compile.args
         echo "+incdir+../../../bench/verilog"           >> ./compile.args
         echo '+define+LOG_DIR=\"../log/$testcase_i\"'   >> ./compile.args
         if ($arg_verb == 1) then
