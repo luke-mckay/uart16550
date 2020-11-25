@@ -119,9 +119,9 @@ task wb_rd_mult( 32 bit address, 4 bit byte select, integer delay,
 module wb_mast(clk, rst, adr, din, dout, cyc, stb, sel, we, ack, err, rty);
 
 input		clk, rst;
-output	[31:0]	adr;
-input	[31:0]	din;
-output	[31:0]	dout;
+output	[`UART_ADDR_WIDTH-1:0]	adr;
+input	[`UART_DATA_WIDTH-1:0]	din;
+output	[`UART_DATA_WIDTH-1:0]	dout;
 output		cyc, stb;
 output	[3:0]	sel;
 output		we;
@@ -134,8 +134,8 @@ input		ack, err, rty;
 
 parameter mem_size = 4096;
 
-reg	[31:0]	adr;
-reg	[31:0]	dout;
+reg	[`UART_ADDR_WIDTH-1:0]	adr;
+reg	[`UART_DATA_WIDTH-1:0]	dout;
 reg		cyc, stb;
 reg	[3:0]	sel;
 reg		we;
@@ -153,7 +153,7 @@ integer		wr_cnt;
 initial
    begin
 	adr = 32'hxxxx_xxxx;
-	dout = 32'hxxxx_xxxx;
+	dout = {`UART_DATA_WIDTH-1{1'bx}};
 	cyc = 0;
 	stb = 0;
 	sel = 4'hx;
@@ -207,7 +207,7 @@ while(~ack & ~err)	@(posedge clk);
 cyc=0;
 stb=0;
 adr = 32'hxxxx_xxxx;
-dout = 32'hxxxx_xxxx;
+dout = {`UART_DATA_WIDTH-1{1'bx}};
 we = 1'hx;
 sel = 4'hx;
 
@@ -250,7 +250,7 @@ while(~ack & ~err)	@(posedge clk);
 #2;
 stb=0;
 we=1'bx;
-dout = 32'hxxxx_xxxx;
+dout = {`UART_DATA_WIDTH-1{1'bx}};
 adr = 32'hxxxx_xxxx;
 
 repeat(delay)
@@ -267,7 +267,7 @@ while(~ack & ~err)	@(posedge clk);
 #2;
 stb=0;
 we=1'bx;
-dout = 32'hxxxx_xxxx;
+dout = {`UART_DATA_WIDTH-1{1'bx}};
 adr = 32'hxxxx_xxxx;
 
 repeat(delay)
@@ -284,7 +284,7 @@ while(~ack & ~err)	@(posedge clk);
 #2;
 stb=0;
 we=1'bx;
-dout = 32'hxxxx_xxxx;
+dout = {`UART_DATA_WIDTH-1{1'bx}};
 adr = 32'hxxxx_xxxx;
 
 repeat(delay)
@@ -303,7 +303,7 @@ stb=0;
 cyc=0;
 
 adr = 32'hxxxx_xxxx;
-dout = 32'hxxxx_xxxx;
+dout = {`UART_DATA_WIDTH-1{1'bx}};
 we = 1'hx;
 sel = 4'hx;
 
@@ -345,7 +345,7 @@ for(n=0;n<count;n=n+1)
 	stb=0;
 	we=1'bx;
 	sel = 4'hx;
-	dout = 32'hxxxx_xxxx;
+	dout = {`UART_DATA_WIDTH-1{1'bx}};
 	adr = 32'hxxxx_xxxx;
    end
 
@@ -432,7 +432,7 @@ for(n=0;n<wcount;n=n+1)
 	stb=0;
 	we=1'bx;
 	sel = 4'hx;
-	dout = 32'hxxxx_xxxx;
+	dout = {`UART_DATA_WIDTH-1{1'bx}};
 	adr = 32'hxxxx_xxxx;
    end
 
@@ -471,7 +471,7 @@ d = din;
 cyc=0;
 stb=0;
 adr = 32'hxxxx_xxxx;
-dout = 32'hxxxx_xxxx;
+dout = {`UART_DATA_WIDTH-1{1'bx}};
 we = 1'hx;
 sel = 4'hx;
 

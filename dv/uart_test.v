@@ -81,8 +81,8 @@ module uart_test ();
 reg       clkr;
 reg       wb_rst_ir;
 wire  [`UART_ADDR_WIDTH-1:0]  wb_adr_i;
-wire  [31:0]  wb_dat_i;
-wire  [31:0]  wb_dat_o;
+wire  [`UART_DATA_WIDTH-1:0]  wb_dat_i;
+wire  [`UART_DATA_WIDTH-1:0]  wb_dat_o;
 wire [3:0]    wb_sel_i;
 wire        pad_stx_o;
 reg       pad_srx_ir;
@@ -114,8 +114,8 @@ uart_top  uart_snd(
 // All the signals and regs named with a 1 are receiver fifo signals
 
 wire  [`UART_ADDR_WIDTH-1:0]  wb1_adr_i;
-wire  [31:0]      wb1_dat_i;
-wire  [31:0]      wb1_dat_o;
+wire  [`UART_DATA_WIDTH-1:0]      wb1_dat_i;
+wire  [`UART_DATA_WIDTH-1:0]      wb1_dat_o;
 wire [3:0]    wb1_sel_i;
 wire        int1_o;
 wire        stx1_o;

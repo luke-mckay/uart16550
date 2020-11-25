@@ -66,8 +66,8 @@ initial tests_failed = 0;
 task start_log;
   output ok_o;
 begin
-  report_log_file_desc  = $fopen({"../log/", testcase_name, "_report.log"});
-  verbose_log_file_desc = $fopen({"../log/", testcase_name, "_verbose.log"});
+  report_log_file_desc  = $fopen({"./", testcase_name, "_report.log"});
+  verbose_log_file_desc = $fopen({"./", testcase_name, "_verbose.log"});
   if ((report_log_file_desc == 0) || (verbose_log_file_desc == 0))
     ok_o = 1'b0;
   else

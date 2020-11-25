@@ -1,9 +1,13 @@
 +libext+.v
-+access+wr
-+mess 
-+incdir+../../../rtl+../../../bench/verilog
-+tcl+../bin/sim.tcl
--y ../../../rtl
--y ../../../bench/verilog
-../../../bench/verilog/uart_test.v
-//+gui
++incdir+../rtl+.+./test_cases
++define+UART_ADDR_WIDTH=3
++define+UART_DATA_WIDTH=8
++timescale+1ns/1ps
+-y ../rtl
+-y .
+./uart_device_utilities.v
+./uart_testbench_utilities.v
+./uart_wb_utilities.v
+./test_cases/uart_int.v
+./uart_testbench.v 
+

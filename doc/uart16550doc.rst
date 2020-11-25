@@ -729,3 +729,56 @@ Thanks to Rick Wright for pointing me many of my bugs.
   with #include command.
 * Removed FIFO_inc.v from CVS tree.
 * Updated specifications .pdf file
+
+Design Verificaiton
+-------------------
+
+Following files are making an UART16550 PHY and are used for testing:
+
++--------------------------+--------------------------------------------------------------------+
+| uart_device_if_defines.v | defines related to PHY                                             |
++--------------------------+--------------------------------------------------------------------+
+| uart_device_if_memory.v  | Module for initializing PHY (reading commands from vapi.log file)  |
++--------------------------+--------------------------------------------------------------------+
+| uart_device_if.v         | Uart PHY with additional feature for testing                       |
++--------------------------+--------------------------------------------------------------------+
+| vapi.log                 | File with commands (expected data, data to be send, etc.)          |
++--------------------------+--------------------------------------------------------------------+
+
+
+
+
+OPERATION:
+
+uart_device_if.v is a uart PHY and connects to the uart_top.v. PHY takes commands from vapi.log
+file. Depending on command it can:
+
+- set a mode (5, 6, 7, 8-bit, parity, stop bits, etc.)
+- set a frequency divider (dll)
+- send a character
+- receive a character and compare it to the expected one
+- send a glitch (after a certain period of time)
+- send a break 
+- detect a break
+- Check if fifo is empty/not empty (and generate an error if expected value differs from actual)
+- delay (does nothing for certain number of characters)
+
+On the other side of uart some kind of host must be connected that controls the phy.
+
+This is the structure::
+
+
+ ||||||||||||||              ||||||||||||||||              ||||||||||||||||
+ |            |              |              |              |              |
+ |   Host     | <----------> |    UART      | <----------> |     PHY      | 
+ |            |              |              |              |              |
+ ||||||||||||||              ||||||||||||||||              ||||||||||||||||
+ 
+ 
+PHY must know how host sets th UART and work in the same mode. Besides that it must know what
+host is sending or expecting to receive. Operation of the PHY must be written in the vapi.log
+file.
+
+When I was using this testing environment, I used OpenRISC1200 as a host. Everything is fully
+operational. UART was also tested in hardware (on two different boards), running uCLinux in
+both, interrupt and polling mode.

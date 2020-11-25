@@ -307,10 +307,15 @@ end
   always@(posedge wb_clk)
     if (wb_clk_en)
       #(T_wb_clk_period / 2) wb_clk = 1'b0;
-  always@(negedge wb_clk)
+  always@(negedge wb_clk or posedge wb_clk_en)
     if (wb_clk_en)
       #(T_wb_clk_period / 2) wb_clk = 1'b1;
 
+initial
+ begin
+    $dumpfile("test.vcd");
+    $dumpvars(0,testbench);
+ end
 
 // SYSTEM signals tracker
 //#######################
