@@ -674,6 +674,14 @@ both, interrupt and polling mode.
 History
 -------
 
+Authors & Contributors
+^^^^^^^^^^^^^^^^^^^^^^
+
+- Jacob Gorban
+- Igor Mohor
+- Tadej Markovic
+- Olof Kindgren
+
 Changes
 ^^^^^^^
 
