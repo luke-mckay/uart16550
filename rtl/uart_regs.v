@@ -380,7 +380,7 @@ uart_receiver receiver(clk, wb_rst_i, lcr, rf_pop, serial_in, enable,
 
 // Asynchronous reading here because the outputs are sampled in uart_wb.v file 
 always @(dl or dlab or ier or iir or scratch
-			or lcr or lsr or msr or rf_data_out or wb_addr_i or wb_re_i)   // asynchrounous reading
+			or lcr or lsr or msr or rf_data_out or wb_addr_i or wb_re_i or mcr)   // asynchrounous reading
 begin
 	case (wb_addr_i)
 		`UART_REG_RB   : wb_dat_o = dlab ? dl[`UART_DL1] : rf_data_out[10:3];
@@ -390,6 +390,7 @@ begin
 		`UART_REG_LS	: wb_dat_o = lsr;
 		`UART_REG_MS	: wb_dat_o = msr;
 		`UART_REG_SR	: wb_dat_o = scratch;
+		`UART_REG_MC    : wb_dat_o = {4'b000,mcr};
 		default:  wb_dat_o = 8'b0; // ??
 	endcase // case(wb_addr_i)
 end // always @ (dl or dlab or ier or iir or scratch...
