@@ -806,8 +806,8 @@ Legacy Bugs From OpenCores
 2. [ ] Three bugs
 3. [X] Typo in documentation
 4. [X] VHDL Implementation Request
-5. [ ] student
-6. [ ] Need to fix commenting-out style in rtl/verilog/uart_defines.v
+5. [X] student
+6. [X] Need to fix commenting-out style in rtl/verilog/uart_defines.v
 7. [X] Need to fix commenting-out style in rtl/verilog/uart_defines.v
 8. [X] about rs
 9. [ ] Does uart_int.v testcase run successfully?
@@ -927,8 +927,8 @@ to point to a different core.  Since this bug isn't relevent considering this co
 @TODO I'm no VHDL master, but maybe it might be worth investigating a 'wrapper' so 
 this core could be instantiated from VHDL?*
 
-5. student  **- @TODO -** *correct/needed?*
-"""""""""""""""""""""""""""""""""""""""""""
+5. student  **- DONE -** *Fixed github issue #4*
+""""""""""""""""""""""""""""""""""""""""""""""""
 
   - opened about 15 years by paul_cooke_98
     
@@ -968,8 +968,8 @@ this core could be instantiated from VHDL?*
 *By inspection the read of the MCR appears to still be broken. The fix provided here, 
 in essence, should fix this issue. @TODO this needs done.*
 
-6. Need to fix commenting-out style in rtl/verilog/uart_defines.v   **- @TODO -** *codeStandard?/needed?diffOriginUnidentified*
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+6. Need to fix commenting-out style in rtl/verilog/uart_defines.v   **- DONE -** *Fixed github issue #3*
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
   - opened over 14 years by ocghost
 

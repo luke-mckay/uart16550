@@ -1,4 +1,9 @@
 doc/_build
 dv/a.out
 dv/*.vcd
+dv/*.cdd
+dv/*.log_old
 .vscode
+build
+fusesoc.conf
+uart_16550/*

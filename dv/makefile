@@ -2,8 +2,8 @@ all: sim
 
 .PHONY: all clean sim
 sim:
-	iverilog -f ./nc.scr 
-	./a.out
+	cd .. ;	fusesoc --cores-root=. run --target=sim uart16550
+	cp -f ../build/uart16550_1.6.0/sim-icarus/uart_interrupts*.log .
 
 clean:
-	rm -f a.out
+	rm -rf ../build

@@ -1,18 +1,81 @@
-CAPI=1
-[main]
-name = ::uart16550:1.5.6
-description = UART 16550 transceiver
+CAPI=2:
+# SPDX-License-Identifier: LGPL-2.1-or-later
+name : ::uart16550:1.6.0
+description: "UART 16550 transceiver"
 
-[fileset rtl]
-files =
- rtl/uart_defines.v[is_include_file]
- rtl/raminfr.v
- rtl/uart_receiver.v
- rtl/uart_regs.v
- rtl/uart_rfifo.v
- rtl/uart_sync_flops.v
- rtl/uart_tfifo.v
- rtl/uart_top.v
- rtl/uart_transmitter.v
- rtl/uart_wb.v
-file_type = verilogSource
+filesets:
+  rtl:
+    files:
+      - rtl/uart_receiver.v
+      - rtl/uart_defines.v:
+          {is_include_file: true, include_path: rtl}
+      - rtl/raminfr.v
+      - rtl/uart_regs.v
+      - rtl/uart_rfifo.v
+      - rtl/uart_sync_flops.v
+      - rtl/uart_tfifo.v
+      - rtl/uart_top.v
+      - rtl/uart_transmitter.v
+      - rtl/uart_wb.v
+    file_type: verilogSource
+
+  tb:
+    files:
+      - dv/uart_testbench.v 
+      - dv/uart_log.v
+      - dv/test_cases/uart_int.v
+      - dv/uart_testbench_defines.v
+      - dv/uart_device_utilities.v
+      - dv/uart_testbench_utilities.v
+      - dv/wb_model_defines.v:
+          {is_include_file: true, include_path: dv}
+      - dv/wb_master_model.v
+      - dv/wb_mast.v
+      - dv/uart_wb_utilities.v
+      - dv/uart_test.v
+      - dv/uart_device.v
+    file_type: verilogSource
+
+parameters:
+  UART_ADDR_WIDTH:
+    datatype: int
+    default: 3
+    paramtype: vlogdefine
+  UART_DATA_WIDTH:
+    datatype: int
+    default: 8
+    paramtype: vlogdefine
+  timescale:
+    datatype: str
+    default: 1ns/10ps
+    paramtype: plusarg
+
+targets:
+  sim:
+    default_tool:
+      icarus
+    filesets: 
+      - tb
+      - rtl
+    parameters:
+        - UART_ADDR_WIDTH
+        - UART_DATA_WIDTH
+        - timescale
+    toplevel:
+      - testbench 
+      - -stestbench_utilities 
+      - -stestcase 
+      - -suart_device_utilities 
+      - -suart_test 
+      - -suart_wb_utilities
+
+  lint:
+    default_tool:
+      verilator
+    filesets: 
+      - rtl
+    tools:
+      verilator:
+        mode: lint-only
+    toplevel: 
+      uart_top

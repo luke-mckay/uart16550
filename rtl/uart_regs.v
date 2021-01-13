@@ -390,7 +390,7 @@ begin
 		`UART_REG_LS	: wb_dat_o = lsr;
 		`UART_REG_MS	: wb_dat_o = msr;
 		`UART_REG_SR	: wb_dat_o = scratch;
-		`UART_REG_MC    : wb_dat_o = {4'b000,mcr};
+		`UART_REG_MC    : wb_dat_o = {3'b000,mcr};
 		default:  wb_dat_o = 8'b0; // ??
 	endcase // case(wb_addr_i)
 end // always @ (dl or dlab or ier or iir or scratch...
